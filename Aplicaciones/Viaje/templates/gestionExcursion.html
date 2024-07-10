@@ -1,0 +1,88 @@
+{%extends "./base.html" %}
+
+{% block title%} Gestion de Excursiones{% endblock %}
+
+
+{% block body%}
+
+
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-3">
+        <h2>Gestión de Excursiones</h2>
+        <div class="card p-3">
+            <div class="card-body">
+                <form action="/registrarExcursion/" method="POST">{% csrf_token %}
+                    <div class="form-group mb-3">
+                        <input type="text" id="txtCodigo" name="txtCodigo" class="form-control" placeholder="Código" minlength="6" maxlength="6" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre" maxlength="50" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <input type="text" id="txtCurso" name="txtCurso" class="form-control" placeholder="Curso" maxlength="50" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <input type="number" id="numCalumnos" name="numCalumnos" class="form-control" placeholder="Cantidad de alumnos" min="1" max="100" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <input type="text" id="txtDestino" name="txtDestino" class="form-control" placeholder="Destino" maxlength="50" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <input type="text" id="txtFecha" name="txtFecha" class="form-control" placeholder="Fechas" maxlength="50" required>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar Excursion</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        
+            <h1>Listado de Excursiones</h1>
+            <div class="table-responsive py-2">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Código Excursión</th>
+                            <th>Nombre Apoderado</th>
+                            <th>Curso</th>
+                            <th>Cantidad Alumnos</th>
+                            <th>Destino</th>
+                            <th>Fechas</th>
+                            <th colspan="2">Opciones</th>
+                        </tr>
+                    </thead>
+    
+                    <tbody>
+                        {% for c in excursiones %}
+                        <tr>
+                            <td>{{forloop.counter}} </td>
+                            <td>{{ c.codigo }}</td>
+                            <td>{{ c.nombre }}</td>
+                            <td>{{ c.curso }}</td>
+                            <td>{{ c.calumnos }}</td>
+                            <td>{{ c.destino }}</td>
+                            <td>{{ c.fecha }}</td>
+                            <td><a href="edicionExcursion/{{c.codigo}}" class="btn btn-info">Editar Datos</a></td>
+                            <td><a href="eliminarExcursion/{{c.codigo}}" class="btn btn-danger btnEliminacion">Eliminar Excursion</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        
+    </div>
+{% endblock %}

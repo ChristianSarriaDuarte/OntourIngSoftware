@@ -1,0 +1,54 @@
+{%extends "./base.html" %}
+
+{% block title%} Edicion Excursiones{% endblock %}
+
+
+
+{% block body%}
+<div class = "row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Edicion de Excursiones</h2>
+        <div class="card p-3">
+            <div class="card-body">
+                <form action="/editarExcursion/" method="POST">{% csrf_token %}
+                    <div class="form-group mb-3">
+                        <input type="text" id="txtCodigo" name="txtCodigo" value="{{excursion.codigo}}" class="form-control" placeholder="Código" 
+                        minlength="6" maxlength="6" readonly required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <input type="text" id="txtNombre" name="txtNombre" value="{{excursion.nombre}}" class="form-control" placeholder="Nombre" 
+                        maxlength="50" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <input type="text" id="txtCurso" name="txtCurso" value="{{excursion.curso}}" class="form-control" placeholder="Curso" 
+                        maxlength="50" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <input type="number" id="numCalumnos" name="numCalumnos" value="{{excursion.calumnos}}" class="form-control" placeholder="Cantidad Alumnos" min="1" max="100" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <input type="text" id="txtDestino" name="txtDestino" value="{{excursion.destino}}" class="form-control" placeholder="Destino" 
+                        maxlength="50" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <input type="text" id="txtFecha" name="txtFecha" value="{{excursion.fecha}}" class="form-control" placeholder="Fecha" 
+                        maxlength="50" required>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar Edicion</button>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
